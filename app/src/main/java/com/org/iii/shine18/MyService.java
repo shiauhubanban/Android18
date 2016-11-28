@@ -9,6 +9,7 @@ import android.util.Log;
 public class MyService extends Service {
     private MediaPlayer mp;
 
+
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
@@ -19,13 +20,16 @@ public class MyService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
         mp = MediaPlayer.create(this, R.raw.cat);
+        //得到長度
         int len = mp.getDuration();
         //Log.v("shine","len:" + len);
         Intent it = new Intent("shine");
         //放進去
         it.putExtra("len",len);
-        //發送出去
+        //發送資料出去
         sendBroadcast(it);
     }
 

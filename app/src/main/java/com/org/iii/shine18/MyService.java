@@ -4,12 +4,10 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+import android.util.Log;
 
 public class MyService extends Service {
     private MediaPlayer mp;
-
-    public MyService() {
-    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -22,6 +20,13 @@ public class MyService extends Service {
     public void onCreate() {
         super.onCreate();
         mp = MediaPlayer.create(this, R.raw.cat);
+        int len = mp.getDuration();
+        //Log.v("shine","len:" + len);
+        Intent it = new Intent("shine");
+        //放進去
+        it.putExtra("len",len);
+        //發送出去
+        sendBroadcast(it);
     }
 
     @Override

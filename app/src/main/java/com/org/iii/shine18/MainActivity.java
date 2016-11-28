@@ -21,6 +21,29 @@ public class MainActivity extends AppCompatActivity {
         //註冊
         myReciver = new MyReceiver();
         registerReceiver(myReciver,new IntentFilter("shine"));
+
+        //可調seekBar
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                if(b){
+                    Intent it = new Intent(MainActivity.this,MyService.class);
+                    it.putExtra("seekto",i);
+                    startService(it);
+
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     //按返回鍵也可結束
@@ -40,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         Intent it = new Intent(this, MyService.class);
         startService(it);
     }
+
     public void pause(View v){
         Intent it = new Intent(this, MyService.class);
         it.putExtra("isPause", true);
@@ -49,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         Intent it = new Intent(this, MyService.class);
         stopService(it);
     }
+
     public class MyReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {

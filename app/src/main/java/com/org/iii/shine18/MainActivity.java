@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +14,17 @@ import android.widget.SeekBar;
 public class MainActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private MyReceiver myReciver;
+    private SoundPool sp;
+    private static int sound1, sound2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         seekBar = (SeekBar)findViewById(R.id.seekbar);
 
+        sp = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
+        sound1 = sp.load(this, R.raw.bubbs, 1);
+        sound2 = sp.load(this, R.raw.wate, 1);
         //註冊
         myReciver = new MyReceiver();
         registerReceiver(myReciver,new IntentFilter("shine"));
@@ -72,6 +79,13 @@ public class MainActivity extends AppCompatActivity {
     public void stop(View v){
         Intent it = new Intent(this, MyService.class);
         stopService(it);
+    }
+
+    public void sound1(View v){
+        sp.play(sound1,0.5f,0.5f,1,0,1);
+    }
+    public void sound2(View v){
+        sp.play(sound2,0.5f,0.5f,1,0,1);
     }
 
     public class MyReceiver extends BroadcastReceiver{

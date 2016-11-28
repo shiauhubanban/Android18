@@ -20,6 +20,16 @@
         android:layout_height="wrap_content"
         android:onClick="stop"
         android:text="Stop" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sound1"
+        android:text="Sound1" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sound2"
+        android:text="Sound2" />
     <SeekBar
         android:id="@+id/seekbar"
         android:layout_width="match_parent"

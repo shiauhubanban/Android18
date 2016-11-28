@@ -51,9 +51,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             int len = intent.getIntExtra("len",-1);
-            if(len<0){
+            int now = intent.getIntExtra("now",-1);
+            if(len>0){
                 //找到最大值
                 seekBar.setMax(len);
+            }
+            if(now>0){
+                //進度條
+                seekBar.setProgress(now);
             }
         }
     }

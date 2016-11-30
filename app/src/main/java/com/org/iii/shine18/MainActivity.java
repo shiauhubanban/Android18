@@ -20,8 +20,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        seekBar = (SeekBar)findViewById(R.id.seekbar);
 
+        seekBar = (SeekBar)findViewById(R.id.seekbar);
+        //最多"4"筆同時
         sp = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
         sound1 = sp.load(this, R.raw.bubbs, 1);
         sound2 = sp.load(this, R.raw.wate, 1);
@@ -88,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         sp.play(sound2,0.5f,0.5f,1,0,1);
     }
 
+    //
     public class MyReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {

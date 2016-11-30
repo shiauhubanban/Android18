@@ -13,6 +13,8 @@ public class MyService extends Service {
     private MediaPlayer mp;
     private Timer timer;
 
+    //https://developer.android.com/guide/components/bound-services.html
+    //若服務要要提供繫結功能，您必須實作 onBind() 回呼方法
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
@@ -32,7 +34,7 @@ public class MyService extends Service {
         Intent it = new Intent("shine");
         //放進去
         it.putExtra("len",len);
-        //發送資料出去
+        //發送資料出去 發送廣播
         sendBroadcast(it);
 
 
@@ -54,6 +56,7 @@ public class MyService extends Service {
         }
     }
 
+    //重啟動
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         boolean isPause = intent.getBooleanExtra("isPause",false);
@@ -73,6 +76,7 @@ public class MyService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    //破壞
     @Override
     public void onDestroy() {
         super.onDestroy();
